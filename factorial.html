@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
+    />
+    <link rel="stylesheet" href="/style.css" />
+    <title>Factorial</title>
+  </head>
+
+  <style>
+    label {
+      text-align: right;
+      font-size: medium;
+    }
+    input[type="text"] {
+      margin: auto;
+      display: block;
+      font-size: large;
+      text-align: center;
+    }
+    button {
+      margin: 0 auto;
+      display: block;
+      font-size: large;
+    }
+  </style>
+
+  <body>
+    <div class="menu-bar">
+      <h1 class="logo">Arj's<span>Website.</span></h1>
+      <ul>
+        <li><a href="/index.html">Home</a></li>
+        <li>
+          <a href="#">Conversion <i class="fas fa-caret-down"></i></a>
+
+          <div class="dropdown-menu">
+            <ul>
+              <li><a href="/CtoF.html">Celsius to Fahrenheit</a></li>
+              <li><a href="/FtoC.html">Fahrenheit to Celsius</a></li>
+              <li><a href="/MtoFt.html">Meters to Feet</a></li>
+              <li><a href="/FttoM.html">Feet to Meters</a></li>
+            </ul>
+          </div>
+        </li>
+
+        <li><a href="/tax.html">Tax Calculator</a></li>
+        <li>
+          <a href="#">Loops <i class="fas fa-caret-down"></i></a>
+
+          <div class="dropdown-menu2">
+            <ul>
+              <li><a href="/factorial.html">Factorial</a></li>
+              <li><a href="/sum.html">Sum</a></li>
+              <li><a href="/average.html">Average</a></li>
+            </ul>
+          </div>
+        </li>
+
+        <li><a href="/payroll.html">Simple Payroll</a></li>
+      </ul>
+    </div>
+    <br />
+    <h1>Input the number which factorial you want to find:</h1>
+
+    <input type="text" name="factorial" id="fact" />
+
+    <br />
+
+    <button onclick="calculate()">Calculate</button>
+
+    <br />
+
+    <p id="output"></p>
+
+    <script>
+      function calculate() {
+        var fact, result, i;
+        fact = document.getElementById("fact").value;
+        result = 1;
+        i = 1;
+
+        while (i <= fact) {
+          result = result * i;
+          i++;
+        }
+        i = i - 1;
+        /*for (let i = 1; i <= fact; i++) {
+             result = result * i;
+        }
+        i = i - 1; */
+
+        document.getElementById("output").innerHTML =
+          "The factorial of " + fact + " is: " + result;
+      }
+    </script>
+  </body>
+</html>

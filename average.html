@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
+    />
+    <link rel="stylesheet" href="/style.css" />
+    <title>Factorial</title>
+  </head>
+
+  <style>
+    label {
+      text-align: right;
+      font-size: medium;
+    }
+    input[type="text"] {
+      margin: auto;
+      display: block;
+      font-size: large;
+      text-align: center;
+    }
+    button {
+    margin: 0 auto;
+    display: block;
+    font-size: large;
+    }
+    </style>
+
+
+  <body>
+    <div class="menu-bar">
+      <h1 class="logo">Arj's<span>Website.</span></h1>
+      <ul>
+        <li><a href="/index.html">Home</a></li>
+        <li><a href="#">Conversion <i class="fas fa-caret-down"></i></a>
+
+            <div class="dropdown-menu">
+                <ul>
+                  <li><a href="/CtoF.html">Celsius to Fahrenheit</a></li>
+                  <li><a href="/FtoC.html">Fahrenheit to Celsius</a></li>
+                  <li><a href="/MtoFt.html">Meters to Feet</a></li>
+                  <li><a href="/FttoM.html">Feet to Meters</a></li>
+                </ul>
+              </div>
+        </li>
+
+        <li><a href="/tax.html">Tax Calculator</a></li>
+        <li><a href="#">Loops <i class="fas fa-caret-down"></i></a>
+
+            <div class="dropdown-menu2">
+                <ul>
+                  <li><a href="/factorial.html">Factorial</a></li>
+                  <li><a href="/sum.html">Sum</a></li>
+                  <li><a href="/average.html">Average</a></li>
+                </ul>
+            </div>
+        </li>
+        
+        <li><a href="/payroll.html">Simple Payroll</a></li>
+      </ul>
+    </div>
+    <br />
+    <h1>Input a number:</h1>
+
+    <input type="text" name="average" id="ave" />
+
+    <br>
+
+    <button onclick="calculate()">Calculate</button>
+
+    <br>
+    
+    <p id="output"></p>
+
+    <script>
+        function calculate () {
+        var ave, result, i;
+        ave = document.getElementById("ave").value;
+        result = 0;
+        i = 1;
+
+        for (let i=1; i <= ave; i++) {
+            result = result + i;
+        }
+        result = result / ave;
+        document.getElementById("output").innerHTML= "The average of the first " +ave+ " numbers is " +result ;
+    }
+    </script>
+    </script>
+  </body>
+</html>
