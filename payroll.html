@@ -25,7 +25,7 @@
     }
     </style>
   
-  <body onload="initcart()">
+  <body onload="initlist()">
     <div class="menu-bar">
       <h1 class="logo">Arj's<span>Website.</span></h1>
       <ul>
@@ -62,97 +62,86 @@
   <br>
   
   <p>
-  <label for="itemdesc">Employee Name:</label>    
-  <input name="itemdesc" id="itemdesc"></input>
+  <label for="employee">Employee Name:</label>    
+  <input name="employee" id="employee"></input>
   
-  <label for="qty">Days Worked:</label>
-  <input id="qty" name="qty" type="number" oninput="computeamount()"></input>
+  <label for="days">Days Worked:</label>
+  <input id="days" name="days" type="number" oninput="computeamount()"></input>
   
-  <label for="price">Daily Rate:</label>
-  <input id="price" name="price" type="number" oninput="computeamount()"></input>
+  <label for="rate">Daily Rate:</label>
+  <input id="rate" name="rate" type="number" oninput="computeamount()"></input>
   
   <label for="deduct">Deduction Amount:</label>
   <input id="deduct" name="deduction" type="number" oninput="computeamount()"></input>
   
   <label for="amount">Gross Pay:</label>
   <input id="amount" name="amount" type="number" readonly></input>
-  <button onclick="addtocart()">Add to List</button>
+  <button onclick="addtolist()">Add to List</button>
   </p>
   
   <p>
   <label for="items">Payroll List Items:</label>
   <input id="items" name="items" type="number" readonly></input>
-  <button onclick="clearcart()">Clear List</button>
+  <button onclick="clearlist()">Clear List</button>
 
   <label for="delitem">Delete Item:</label>
   <input id="delitem" name="delitem" type="number" ></input>
   <button onclick="deleteitem()" >Delete</button>  
   </p>
   
-  <p id="cart"></p>
+  <p id="list"></p>
   <script>
   
-  
-     
-      function initcart(){
-          cart=[];
-          document.getElementById("items").value=cart.length;
-          document.getElementById("cart").innerHTML="";
-  
-              
+      function initlist(){
+          list=[];
+          document.getElementById("items").value=list.length;
+          document.getElementById("list").innerHTML="";            
       }
   
-     
-      function clearcart(){
+      function clearlist(){
           var toclear;
   
-          toclear=confirm("Delete all item(s) from cart ?");
+          toclear=confirm("Delete all item(s) from list ?");
   
           if (toclear) {
-               initcart();
-          }
-              
+               initlist();
+          }     
       }
-  
-   
-      function addtocart(){
+
+      function addtolist(){
            
-           var cartitem = {
+           var listitem = {
                "item": "1",
-               "price": 0,
-               "qty": 1,
+               "rate": 0,
+               "days": 1,
                "deduct": 1,
               "itemamount" : function itemamount(){
-                   return Math.round((this.price*this.qty)-this.deduct);  
+                   return Math.round((this.rate*this.days)-this.deduct);  
                  }
               };
   
-            cartitem.item=document.getElementById("itemdesc").value;
-            cartitem.qty=document.getElementById("qty").value;
-            cartitem.price=document.getElementById("price").value;
-            cartitem.deduct=document.getElementById("deduct").value;
+            listitem.item=document.getElementById("employee").value;
+            listitem.days=document.getElementById("days").value;
+            listitem.rate=document.getElementById("rate").value;
+            listitem.deduct=document.getElementById("deduct").value;
   
-            console.log(cartitem.item);
-            console.log(cartitem.qty);
-            console.log(cartitem.price);
-            console.log(cartitem.deduct);
+            console.log(listitem.item);
+            console.log(listitem.days);
+            console.log(listitem.rate);
+            console.log(listitem.deduct);
   
-  
-             cart.push(cartitem);
+             list.push(listitem);
 
+            console.log(list.length);
+            document.getElementById("items").value=list.length;
   
-            console.log(cart.length);
-            document.getElementById("items").value=cart.length;
-  
-            showcart();
-  
+            showlist();
       }
-  
 
       function computeamount() {
             var q,p,q,d;
-            q = document.getElementById("qty").value*1;
-            p = document.getElementById("price").value*1;
+            q = document.getElementById("days").value*1;
+            p = document.getElementById("rate").value*1;
             d = document.getElementById("deduct").value*1;
   
             a = Math.round((q*p)-d); 
@@ -174,18 +163,16 @@
   
           if (todelete) {
   
-              cart.splice(itemno-1,1);
-              document.getElementById("items").value=cart.length;
-               showcart();   
+              list.splice(itemno-1,1);
+              document.getElementById("items").value=list.length;
+               showlist();   
           }
-  
       }
 
-      function showcart(){
+      function showlist(){
   
-          var i,l,carttext,totalamount,ln;
+          var i,l,listtext,totalamount,ln;
           var theader,tbody,tb,tfooter;
-  
   
           theader ="<thead>";
           theader+="<tr>";
@@ -198,29 +185,26 @@
           theader+="</tr>";
           theader+="</thead>";
           
-
-          l = cart.length;
+          l = list.length;
         
-          
-          for (i=0,totalamount=0,carttext="",tbody='';i<l;i++){
+          for (i=0,totalamount=0,listtext="",tbody='';i<l;i++){
               ln=i+1;    
               tbody += "<tr>"
                   +'<td style="text-align:center">'+ln+' </td>'
-                  +'<td>'+cart[i].item+' </td>'
-                  +'<td style="text-align:right">'+cart[i].qty+'</td>'
-                  +'<td style="text-align:right">'+cart[i].price+'</td>'
-                  +'<td style="text-align:right">'+cart[i].deduct+'</td>'
-                  +'<td style="text-align:right">'+cart[i].itemamount()+'</td>'                
+                  +'<td>'+list[i].item+' </td>'
+                  +'<td style="text-align:right">'+list[i].days+'</td>'
+                  +'<td style="text-align:right">'+list[i].rate+'</td>'
+                  +'<td style="text-align:right">'+list[i].deduct+'</td>'
+                  +'<td style="text-align:right">'+list[i].itemamount()+'</td>'                
                   +"</tr>";
                          
-              totalamount+=cart[i].itemamount();
+              totalamount+=list[i].itemamount();
             
-  
           }
 
           tfooter ="<tfoot>";
           tfooter+="<tr>";
-          tfooter+='<th style="text-align:center">'+cart.length+'</th>';
+          tfooter+='<th style="text-align:center">'+list.length+'</th>';
           tfooter+='<th style="text-align:left">Items</th>';
           tfooter+='<th></th>';
           tfooter+='<th></th>';
@@ -230,14 +214,12 @@
           tfooter+="</tfoot>";
   
          console.log(theader+tbody+tfooter);
-          document.getElementById("cart").innerHTML=
-             "<table>"+theader+tbody+tfooter+"</table>";
-  
-  
+          document.getElementById("list").innerHTML=
+             "<table>"+theader+tbody+tfooter+"</table>";      
       }
     
 
-  var cart = []; 
+  var list = []; 
   
   </script>
   </body>
