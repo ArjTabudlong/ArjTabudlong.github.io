@@ -74,7 +74,7 @@
   <label for="deduct">Deduction Amount:</label>
   <input id="deduct" name="deduction" type="number" oninput="computeamount()"></input>
   
-  <label for="amount">Gross Pay:</label>
+  <label for="amount">Net Pay:</label>
   <input id="amount" name="amount" type="number" readonly></input>
   <button onclick="addtolist()">Add to List</button>
   </p>
@@ -117,7 +117,10 @@
                "deduct": 1,
               "itemamount" : function itemamount(){
                    return Math.round((this.rate*this.days)-this.deduct);  
-                 }
+                 },
+              "itemgross" : function itemgross(){
+                return Math.round((this.rate*this.days)-this.deduct);  
+              }
               };
   
             listitem.item=document.getElementById("employee").value;
@@ -180,8 +183,9 @@
           theader+='<th style="text-align:center">Employee Name</th>';
           theader+="<th style=text-align:center>Days Worked</th>";
           theader+='<th style="text-align:center">Daily Rate</th>';
-          theader+="<th style=text-align:center>Deduction</th>";
           theader+="<th style=text-align:center>Gross Pay</th>";
+          theader+="<th style=text-align:center>Deduction</th>";
+          theader+="<th style=text-align:center>Net Pay</th>";
           theader+="</tr>";
           theader+="</thead>";
           
@@ -194,8 +198,9 @@
                   +'<td>'+list[i].item+' </td>'
                   +'<td style="text-align:right">'+list[i].days+'</td>'
                   +'<td style="text-align:right">'+list[i].rate+'</td>'
+                  +'<td style="text-align:right"><b>'+list[i].itemgross()+'</b></td>'
                   +'<td style="text-align:right">'+list[i].deduct+'</td>'
-                  +'<td style="text-align:right">'+list[i].itemamount()+'</td>'                
+                  +'<td style="text-align:right"><b>'+list[i].itemamount()+'</b></td>'                
                   +"</tr>";
                          
               totalamount+=list[i].itemamount();
@@ -208,7 +213,8 @@
           tfooter+='<th style="text-align:left">Items</th>';
           tfooter+='<th></th>';
           tfooter+='<th></th>';
-          tfooter+='<th>Total Amount</th>';
+          tfooter+='<th></th>';
+          tfooter+='<th>Total Amount:</th>';
           tfooter+='<th style="text-align:right">'+totalamount+'</th>';
           tfooter+="</tr>";
           tfooter+="</tfoot>";
